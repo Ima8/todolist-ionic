@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ItemSliding } from 'ionic-angular';
 
 @Component({
   selector: 'page-tasklist',
@@ -24,15 +24,16 @@ export class tasklistPage {
     }
   }
 
-  markDone(task: any): void {
-    task.status = "done"    
+  markDone(slidingItem: ItemSliding, task: any): void {
+    task.status = "done"
+    slidingItem.close()
   }
 
   removeTask(task: any): void {
     task.status = "removed";
     let index = this.tasks.indexOf(task)
-    if(index>-1){
-      this.tasks.splice(index,1)
+    if (index > -1) {
+      this.tasks.splice(index, 1)
     }
   }
 }
