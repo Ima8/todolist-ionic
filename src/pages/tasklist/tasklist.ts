@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input} from '@angular/core';
 import { NavController, ItemSliding } from 'ionic-angular';
 
 @Component({
@@ -6,6 +6,8 @@ import { NavController, ItemSliding } from 'ionic-angular';
   templateUrl: 'tasklist.html'
 })
 export class tasklistPage {
+
+ @Input() newTask
 
   constructor(public navCtrl: NavController) {
     this.tasks = [
@@ -16,9 +18,11 @@ export class tasklistPage {
     ]
   }
   tasks: Array<any> = [];
-
-  addTask(): void {
-    let newTask: string = prompt("New Task")
+  isDisplay:boolean = false;
+  showAdd():void{
+    this.isDisplay =!this.isDisplay
+  }
+  addTask(newTask): void {
     if (newTask) {
       this.tasks.push({ title: newTask, status: 'open' })
     }
@@ -29,11 +33,12 @@ export class tasklistPage {
     slidingItem.close()
   }
 
-  removeTask(task: any): void {
+  removeTask(slidingItem: ItemSliding,task: any): void {
     task.status = "removed";
     let index = this.tasks.indexOf(task)
     if (index > -1) {
       this.tasks.splice(index, 1)
     }
+    slidingItem.close()
   }
 }

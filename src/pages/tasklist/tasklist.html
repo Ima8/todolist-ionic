@@ -4,7 +4,7 @@
             Tasks
         </ion-title>
         <ion-buttons end>
-            <button ion-button icon-left (click)="addTask()">
+            <button ion-button icon-left (click)="showAdd()">
                 <ion-icon  ios="md-add" md="md-add-circle"></ion-icon>Add It<em></em>
             </button>
         </ion-buttons>
@@ -12,6 +12,13 @@
 </ion-header>
 
 <ion-content padding>
+    <form *ngIf="isDisplay" (ngSubmit)="addTask(newTask)">
+        <ion-item>
+            <ion-label> New Task: </ion-label>
+            <ion-input type="text" [(ngModel)]="newTask" name="task"></ion-input>
+        </ion-item>
+        <button ion-button type="submit">Add</button>
+    </form>
     <ion-list>
         <ion-item-sliding #slidingItem *ngFor="let task of tasks">
             <ion-item [ngClass]="{taskDone: task.status=='done'}">
