@@ -1,1 +1,5 @@
-page-tasklist {}
+page-tasklist {
+    .taskDone {
+        text-decoration: line-through;
+    }
+}
